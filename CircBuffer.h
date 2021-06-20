@@ -32,7 +32,7 @@ public:
 
 
 	/*
-	 * Accessors and mutators:
+	 * 	Accessors and mutators:
 	 */
 
 	// check buffer length
@@ -48,9 +48,13 @@ public:
 	void setValue(unsigned int loc, T val);
 
 
+
 private:
 
-	// class variables
+	/*
+	* 	Class variables
+	*/
+
 	const unsigned int max_len;				// maximum length of buffer
 	std::deque<T> buffer;					// buffer deque container
 

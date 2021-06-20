@@ -8,41 +8,45 @@
 #ifndef CMDMENU_H_
 #define CMDMENU_H_
 #include <iostream>
+#include "BufferCmds.h"
 
 namespace DynDataStore {
 	class CmdMenu {
 
 	public:
 
-		// constructor that prints menu options
-		CmdMenu(unsigned int len, std::string optionList[], std::string text);
+		// constructor that creates menu options
+		CmdMenu(unsigned short int numOps,std::string mainList[],unsigned short int numActs,std::string actionList[], BufferCmds &interface);
 
 		// destructor
 		virtual ~CmdMenu(){}
 
-		// return menu options
+		// return current menu options
 		void printMenu();
 
-		// interprets incoming text
-		void parseInput();
+		// interpret incoming text for main menu
+		void parseMainInput();
 
-		// return follow-up prompt
-		bool nextPrompt();
+		// interpret incoming text for actions menu
+		void parseActionInput();
 
 
 	private:
-		// text to explain menu function
+
+		// text to explain menu functions
 		std::string instructions;
-		std::string menu;
+		std::string mainMenu;
+		std::string actionMenu;
 
-		// menu length
-		const unsigned short int numOptions;
+		// menu lengths
+		const unsigned short int mainOptions;
+		const unsigned short int actionOptions;
 
-		// output option integer
+		// output data
 		unsigned short int outOption;
-
-		// output value string
 		std::string outValue;
+
+		BufferCmds & bufferInterface;
 
 
 	};

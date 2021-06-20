@@ -4,16 +4,22 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../BufferCmds.cpp \
+../BufferCmds_test.cpp \
 ../CircBuffer.cpp \
 ../CmdMenu.cpp \
 ../DynDataStore.cpp 
 
 OBJS += \
+./BufferCmds.o \
+./BufferCmds_test.o \
 ./CircBuffer.o \
 ./CmdMenu.o \
 ./DynDataStore.o 
 
 CPP_DEPS += \
+./BufferCmds.d \
+./BufferCmds_test.d \
 ./CircBuffer.d \
 ./CmdMenu.d \
 ./DynDataStore.d 
