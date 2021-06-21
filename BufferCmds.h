@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <map>
 
 #ifndef BUFFERCMDS_H_
 #define BUFFERCMDS_H_
@@ -15,8 +16,12 @@ namespace DynDataStore {
 
 	class BufferCmds {
 	public:
+
+		// constructor
 		BufferCmds();
-		virtual ~BufferCmds();
+
+		// destructor;
+		virtual ~BufferCmds(){}
 
 		// return state of buffer
 		bool getBufferState();
@@ -24,21 +29,21 @@ namespace DynDataStore {
 		// change state of buffer
 		void setBufferState(bool state);
 
-		// change state of buffer
+		// change the current operation
 		void setBufferOperation(char opt);
 
-		// change state of buffer
+		// change the current value
 		void setBufferValue(std::string val);
 
 
 		// menu lengths
 		const unsigned short int numDataTypes;
 		const unsigned short int numActions;
-		enum Format {kInteger, kFloat, kDouble, kString, kChar} dTypes;
+
 		// pointers to menu lists
 		const std::string *pDataType;
 		const std::string *pActionList;
-
+		std::map<char,std::string> &refActions;
 
 	private:
 		// buffer state machine variable for interfacing

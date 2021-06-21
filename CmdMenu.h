@@ -15,26 +15,34 @@ namespace DynDataStore {
 
 	public:
 
-		// constructor that creates menu options and refers to buffer interface instance
+		// constructor that refers to buffer interface instance
 		CmdMenu(BufferCmds &interface);
 
 		// destructor
 		virtual ~CmdMenu(){}
 
+		// runs menu TUI until terminal is exited
+		void runMenu();
+
 		// return current menu options
 		void printMenu();
 
+		// get text input from terminal
+		void getInput();
+
 		// interpret incoming text for main menu
-		void parseMainInput();
+		void parseMainInput(char opt, int numOpt, std::string val, int numVal);
 
 		// interpret incoming text for actions menu
-		void parseActionInput();
+		void parseActionInput(char opt, int numOpt, std::string val, int numVal);
+
+		// helper function for buffer interfacing
+		void pushToBufferInterface(char opt, std::string val);
 
 
 	private:
 
 		// text to explain menu functions
-		std::string instructions;
 		std::string mainMenu;
 		std::string actionMenu;
 

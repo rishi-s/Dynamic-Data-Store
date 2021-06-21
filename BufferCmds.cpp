@@ -20,17 +20,18 @@ const std::string actionList[4]={
 	"p - print element(s) separated by commas (e.g. 'p:1,4,17,32,803,2296')", \
 	"s – save buffer to .csv file using given filename (e.g. 's:MyData')"
 };
+std::map<char,string> actions;
 
-
-	BufferCmds::BufferCmds():numDataTypes(5),numActions(4),bufferInit(false){
+	// constructor with member variable initialisation
+	BufferCmds::BufferCmds():numDataTypes(5),numActions(4),refActions(actions),bufferInit(false){
 		pDataType=dataTypes;
 		pActionList=actionList;
+		actions['a']="***Adding value to buffer***";
+		actions['r']="***Reading .csv file to buffer***";
+		actions['p']="***Printing element from buffer***";
+		actions['s']="***Saving buffer to .csv file***";
 	}
 
-	BufferCmds::~BufferCmds() {
-		// TODO Auto-generated destructor stub
-
-	}
 
 	// return state of buffer
 	bool BufferCmds::getBufferState(){
@@ -42,12 +43,12 @@ const std::string actionList[4]={
 		bufferInit=state;
 	}
 
-	// change state of buffer
+	// set the current operation
 	void BufferCmds::setBufferOperation(char opt){
 		bufferOperation=opt;
 	}
 
-	// change state of buffer
+	// set the current value
 	void BufferCmds::setBufferValue(string val){
 		bufferValue=val;
 	}
