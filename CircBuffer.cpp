@@ -10,43 +10,44 @@
 
 using namespace std;
 
+	namespace DynDataStore{
 
-// check buffer length
-template <typename T>
-unsigned int CircBuffer<T>::checkLength(){
-	return buffer.size();
-}
-
-// add value to buffer
-template <typename T>
-void CircBuffer<T>::addValue(T val){
-	// shorten the buffer (lose oldest value) if it is at full size.
-	if(checkLength()>=max_len) buffer.pop_front();
-	// then add the new value
-	buffer.push_back(val);
-}
-
-// return value of specified element
-template <typename T>
-T CircBuffer<T>::getValue(unsigned int loc){
-	if(loc>max_len) {
-		cout << "The location is out of the buffer range.\n";
+	// check buffer length
+	template <typename T>
+	unsigned int CircBuffer<T>::checkLength(){
+		return buffer.size();
 	}
-	return buffer.operator[](loc);
-}
 
-// change value of specified element
-template <typename T>
-void CircBuffer<T>::setValue(unsigned int loc, T val){
-	if(loc<=max_len){
-		buffer.operator[](loc)=val;
+	// add value to buffer
+	template <typename T>
+	void CircBuffer<T>::addValue(T val){
+		// shorten the buffer (lose oldest value) if it is at full size.
+		if(checkLength()>=max_len) buffer.pop_front();
+		// then add the new value
+		buffer.push_back(val);
 	}
-	else{
-		cout << "The location is out of the buffer range.\n";
+
+	// return value of specified element
+	template <typename T>
+	T CircBuffer<T>::getValue(unsigned int loc){
+		if(loc>max_len) {
+			cout << "The location is out of the buffer range.\n";
+		}
+		return buffer.operator[](loc);
 	}
-}
 
+	// change value of specified element
+	template <typename T>
+	void CircBuffer<T>::setValue(unsigned int loc, T val){
+		if(loc<=max_len){
+			buffer.operator[](loc)=val;
+		}
+		else{
+			cout << "The location is out of the buffer range.\n";
+		}
+	}
 
+} /* namespace DynDataStore */
 
 
 

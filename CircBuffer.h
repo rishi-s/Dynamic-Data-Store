@@ -12,52 +12,51 @@
 #include <iostream>
 #include <deque>
 
-
-// Declaration of dynamic buffer template class.
-template<class T>
-class CircBuffer {
-
-
-public:
-
-	// constructor definition with member variable initialisation
-	CircBuffer(unsigned int len):max_len(len){
-		std::cout <<"Buffer constructed\n";
-	}
-
-	// destructor definition
-	virtual ~CircBuffer(){
-		std::cout <<"Buffer destroyed\n";
-	}
+namespace DynDataStore{
+	// Declaration of dynamic buffer template class.
+	template<class T>
+	class CircBuffer {
 
 
-	/*
-	 * 	Accessors and mutators:
-	 */
+	public:
 
-	// check buffer length
-	unsigned int checkLength();
+		// constructor definition with member variable initialisation
+		CircBuffer(unsigned int len):max_len(len){
+			std::cout <<"Buffer constructed\n";
+		}
 
-	// add value to buffer
-	void addValue(T val);
-
-	// return value of specified element
-	T getValue(unsigned int loc);
-
-	// change value of specified element
-	void setValue(unsigned int loc, T val);
+		// destructor definition
+		virtual ~CircBuffer(){
+			std::cout <<"Buffer destroyed\n";
+		}
 
 
+		/*
+		 * 	Accessors and mutators:
+		 */
 
-private:
+		// check buffer length
+		unsigned int checkLength();
 
-	/*
-	* 	Class variables
-	*/
+		// add value to buffer
+		void addValue(T val);
 
-	const unsigned int max_len;				// maximum length of buffer
-	std::deque<T> buffer;					// buffer deque container
+		// return value of specified element
+		T getValue(unsigned int loc);
 
-};
+		// change value of specified element
+		void setValue(unsigned int loc, T val);
 
+
+	private:
+
+		/*
+		* 	Class variables
+		*/
+
+		const unsigned int max_len;				// maximum length of buffer
+		std::deque<T> buffer;					// buffer deque container
+
+	};
+} /* namespace DynDataStore */
 #endif /* CIRCBUFFER_H_ */

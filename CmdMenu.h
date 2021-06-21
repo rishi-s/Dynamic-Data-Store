@@ -15,8 +15,8 @@ namespace DynDataStore {
 
 	public:
 
-		// constructor that creates menu options
-		CmdMenu(unsigned short int numOps,std::string mainList[],unsigned short int numActs,std::string actionList[], BufferCmds &interface);
+		// constructor that creates menu options and refers to buffer interface instance
+		CmdMenu(BufferCmds &interface);
 
 		// destructor
 		virtual ~CmdMenu(){}
@@ -42,13 +42,11 @@ namespace DynDataStore {
 		const unsigned short int mainOptions;
 		const unsigned short int actionOptions;
 
-		// output data
-		unsigned short int outOption;
-		std::string outValue;
-
+		// reference to buffer interface instance
 		BufferCmds & bufferInterface;
 
 
 	};
-}
+} /* namespace DynDataStore */
+
 #endif /* CMDMENU_H_ */
