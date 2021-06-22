@@ -19,8 +19,8 @@ int main(int argc, char **argv) {
 	 * Any pointers appreciated (ha ha!).
 	 */
 	shared_ptr<DynDataStore::CircBuffBase> *ptr;
-	//ptr = CircBuffer<int>(1024); // ERROR - incompatible type
-	// ptr = dynamic_cast<CircBuffer<int>(1024)>; // ERROR casting syntax for templated class problematic?
+	//ptr = DynDataStore::CircBuffer<int>(1024); // ERROR - incompatible type
+	//ptr = dynamic_cast<DynDataStore::CircBuffer<int>(1024)>; // ERROR casting syntax for templated class problematic?
 	return 0;
 }
 
