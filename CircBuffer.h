@@ -13,16 +13,23 @@
 #include <deque>
 
 namespace DynDataStore{
+	class CircBuffBase{
+	public:
+
+		CircBuffBase(){}
+		virtual ~CircBuffBase(){}
+	};
+
 	// Declaration of dynamic buffer template class.
 	template<class T>
-	class CircBuffer {
+	class CircBuffer: public CircBuffBase {
 
 
 	public:
 
 		// constructor definition with member variable initialisation
-		CircBuffer(unsigned int len):max_len(len){
-			std::cout <<"Buffer constructed\n";
+		CircBuffer(unsigned short int len):max_len(len){
+			std::cout <<"Buffer created\n";
 		}
 
 		// destructor definition
@@ -35,11 +42,15 @@ namespace DynDataStore{
 		 * 	Accessors and mutators:
 		 */
 
+
+
 		// check buffer length
 		unsigned int checkLength();
 
+
 		// add value to buffer
 		void addValue(T val);
+
 
 		// return value of specified element
 		T getValue(unsigned int loc);
@@ -54,8 +65,11 @@ namespace DynDataStore{
 		* 	Class variables
 		*/
 
-		const unsigned int max_len;				// maximum length of buffer
-		std::deque<T> buffer;					// buffer deque container
+
+		unsigned int max_len;				// maximum length of buffer
+		std::deque<T> buffer;				// buffer deque container
+
+
 
 	};
 } /* namespace DynDataStore */

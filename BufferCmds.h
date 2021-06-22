@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <map>
+#include "CircBuffer.h"
 
 #ifndef BUFFERCMDS_H_
 #define BUFFERCMDS_H_
@@ -17,37 +18,30 @@ namespace DynDataStore {
 	class BufferCmds {
 	public:
 
-		// constructor
-		BufferCmds();
+
+		// constructor definition with member variable initialisation
+		BufferCmds():bufferOperation('x'),bufferValue(""){}
 
 		// destructor;
 		virtual ~BufferCmds(){}
 
-		// return state of buffer
-		bool getBufferState();
-
-		// change state of buffer
-		void setBufferState(bool state);
+		// get the current operation
+		char getBufferOperation();
 
 		// change the current operation
 		void setBufferOperation(char opt);
 
 		// change the current value
+		std::string getBufferValue();
+
+		// change the current value
 		void setBufferValue(std::string val);
 
+		// interact with an instantiated buffer
+		void applyBufferOperation();
 
-		// menu lengths
-		const unsigned short int numDataTypes;
-		const unsigned short int numActions;
-
-		// pointers to menu lists
-		const std::string *pDataType;
-		const std::string *pActionList;
-		std::map<char,std::string> &refActions;
 
 	private:
-		// buffer state machine variable for interfacing
-		bool bufferInit;
 		char bufferOperation;
 		std::string bufferValue;
 

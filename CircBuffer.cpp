@@ -12,8 +12,8 @@ using namespace std;
 
 	namespace DynDataStore{
 
-	// check buffer length
 	template <typename T>
+	// check buffer length
 	unsigned int CircBuffer<T>::checkLength(){
 		return buffer.size();
 	}

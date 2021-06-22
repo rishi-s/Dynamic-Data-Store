@@ -50,8 +50,17 @@ namespace DynDataStore {
 		const unsigned short int mainOptions;
 		const unsigned short int actionOptions;
 
+		// simple state machine for buffer initialisation
+		bool bufferInit;
+
 		// reference to buffer interface instance
-		BufferCmds & bufferInterface;
+		BufferCmds &bufferInterface;
+
+		// pointers to menu lists
+		const std::string *pDataType;
+		const std::string *pActionList;
+		std::map<char,std::string> &refActions;
+
 
 
 	};
