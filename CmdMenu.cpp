@@ -7,7 +7,7 @@
 
 
 #include "CmdMenu.h"
-#include "BufferCmds.h"
+
 
 
 using namespace std;
@@ -15,31 +15,31 @@ using namespace std;
 namespace DynDataStore {
 
 	// string containers for menu display
-	const string dataTypes[5]={"Integer","Float","Double","String","Char"};
+	const string dataTypes[5]={"Char","Integer","Float","Double","String"};
 	const string actionList[4]={
-		"a – add value to buffer (e.g. 'a:897', or 'a:0.8967', or 'a:Kansas_City')", \
-		"r – read contents of existing .csv file into buffer using filepath (e.g. 'r:./ThisData')", \
+		"a – add value to buffer (e.g. 'a:897', or 'a:Kansas_City') [NOTE: char is truncated to first character after ':']", \
+		"r – read contents of existing .csv file (first line/row only) into buffer (e.g. 'r:<filepath>/MyFile.csv')", \
 		"p - print specified element from buffer (e.g. 'p:2296')", \
-		"s – save buffer to .csv file using given filename (e.g. 's:MyData')"
+		"s – save buffer to .csv file using given filename (e.g. 's:<filepath>/MyData')"
 	};
 	std::map<char,string> actions;
 
 
 	// constructor definition that creates menu options
-	CmdMenu::CmdMenu(BufferCmds &interface): mainOptions(5), actionOptions(4), bufferInterface(interface),\
-			bufferInit(false), refActions(actions) {
+	CmdMenu::CmdMenu(BufferCmds &interface): mainOptions(5), actionOptions(4), bufferInit(false), \
+			bufferInterface(interface), refActions(actions) {
 		pDataType=dataTypes;
 		pActionList=actionList;
 
 		// populate custom option menu
-		mainMenu = "Enter a data type option and state the buffer size.\n"
+		mainMenu = "Enter a data type option and state the buffer size without character spaces.\n"
 				"Use the format <#>:<##########> (e.g. '2:1024' for buffer of 1024 doubles): \n";
 		for(unsigned int i=0; i<mainOptions; i++){
 			mainMenu = mainMenu + to_string(i) + " - " + pDataType[i] + "\n";
 		}
 
 		// populate custom action menu
-		actionMenu = "Pick an action for the current buffer and provide the required parameter.\n"
+		actionMenu = "Pick an action for the current buffer and provide the required parameter without character spaces.\n"
 				"Use the format <@>:<%%%%%%%%%%>: \n";
 		for(unsigned int i=0; i<actionOptions; i++){
 			actionMenu = actionMenu + pActionList[i] + "\n";
@@ -62,8 +62,6 @@ namespace DynDataStore {
 		}
 		getInput();
 	}
-
-
 
 
 	// get text input from terminal
@@ -94,7 +92,7 @@ namespace DynDataStore {
 		}
 		// handle incorrect syntax
 		else{
-			cout << "**Invalid format. Please use the correct syntax. \n \n";
+			cout << "***Invalid format. Please use the correct syntax.***\n \n";
 			printMenu();
 		}
 	}
@@ -105,9 +103,10 @@ namespace DynDataStore {
 
 		// check the option number and value are in range
 		if(numOpt>=0 && numOpt<mainOptions && numVal>0){
-			cout << "Loading buffer for " << pDataType[numOpt] << " of " << numVal << " elements.\n \n";
+
+			cout << "***Loading buffer for " << pDataType[numOpt] << " of " << numVal << " elements.***\n \n";
 			bufferInit=true;
-			printMenu();
+			setupBufferInterface(opt,val);
 		}
 
 		// handle incorrect menu value
@@ -141,10 +140,20 @@ namespace DynDataStore {
 	}
 
 
+	// helper function for buffer setup
+	void CmdMenu::setupBufferInterface(char opt, string val){
+		bufferInterface.setBufferOperation(opt);
+		bufferInterface.setBufferValue(val);
+		bufferInterface.setupBuffer();
+		printMenu();
+	}
+
+
 	// helper function for buffer interfacing
 	void CmdMenu::pushToBufferInterface(char opt, string val){
 		bufferInterface.setBufferOperation(opt);
 		bufferInterface.setBufferValue(val);
+		bufferInterface.applyBufferOperation();
 		printMenu();
 	}
 

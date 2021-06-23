@@ -3,6 +3,8 @@
  *
  *  Created on: 18 Jun 2021
  *      Author: rishi
+ *
+ *      TUI menu class to create and operate circular buffers.
  */
 
 #ifndef CMDMENU_H_
@@ -21,9 +23,6 @@ namespace DynDataStore {
 		// destructor
 		virtual ~CmdMenu(){}
 
-		// runs menu TUI until terminal is exited
-		void runMenu();
-
 		// return current menu options
 		void printMenu();
 
@@ -35,6 +34,9 @@ namespace DynDataStore {
 
 		// interpret incoming text for actions menu
 		void parseActionInput(char opt, int numOpt, std::string val, int numVal);
+
+		// helper function for buffer interfacing
+		void setupBufferInterface(char opt, std::string val);
 
 		// helper function for buffer interfacing
 		void pushToBufferInterface(char opt, std::string val);
@@ -59,11 +61,10 @@ namespace DynDataStore {
 		// pointers to menu lists
 		const std::string *pDataType;
 		const std::string *pActionList;
-		std::map<char,std::string> &refActions;
-
-
+		std::map<char,std::string> refActions;
 
 	};
+
 } /* namespace DynDataStore */
 
 #endif /* CMDMENU_H_ */
